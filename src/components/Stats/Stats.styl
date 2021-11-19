@@ -1,0 +1,32 @@
+.stats
+  display flex
+  justify-content space-between
+  margin 0 0 30px 0
+
+  &__item
+    display flex
+    flex-direction column
+    align-items center
+    margin-right 50px
+
+    &:last-child
+      margin-right 0
+
+    &-title
+      margin 0 0 10px 0
+      font-size 18px
+      text-align center
+      text-transform uppercase
+      color color-stats-text
+
+    &-value
+      font-weight 600
+      font-size 20px
+
+    &-units
+      color color-stats-text
+
+@media (min-width width-mobile)
+  .stats
+    justify-content flex-start
+    margin 0 30px 0 0
