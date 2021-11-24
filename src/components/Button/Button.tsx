@@ -3,15 +3,15 @@ import React from 'react';
 type TButtonProps = {
   text: string,
   buttonClickHandler?: () => void,
-  isShaking?: boolean
+  isAnimate?: boolean
 }
 
-const Button: React.FC<TButtonProps> = (props: TButtonProps) => (
+const Button: React.FC<TButtonProps> = ({ text, buttonClickHandler, isAnimate = false}: TButtonProps) => (
   <button
-    className={props.isShaking ? 'button button--shake' : 'button'}
-    onClick={props.buttonClickHandler}
+    className={isAnimate ? 'button button--animate' : 'button'}
+    onClick={buttonClickHandler}
   >
-      {props.text}
+      {text}
   </button>
 );
 

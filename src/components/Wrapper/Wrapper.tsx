@@ -4,9 +4,9 @@ type TWrapperProps = {
   children: React.ReactNode
 };
 
-const Wrapper: React.FC<TWrapperProps> = (props: TWrapperProps) => (
+const Wrapper: React.FC<TWrapperProps> = ({ children }: TWrapperProps) => (
   <div className="wrapper">
-    {props.children}
+    {children}
   </div>
 );
 
