@@ -1,5 +1,8 @@
 export const AppRoutes = {
   HOME: '/',
-  TEST: 'test',
-  STATS: 'stats'
+  TEST: '/test'
 };
+
+export const API_URL = 'https://fish-text.ru';
+
+export const VALID_SYMBOLS_REGEXP = /^[a-zA-Zа-яА-ЯёЁ\s\d.,\-+*\\|=~`!@"'#№$%^:;&?()[\]<>]$/;
