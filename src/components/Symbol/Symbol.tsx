@@ -2,13 +2,15 @@ import React from 'react';
 
 type TSymbolProps = {
   value: string,
-  modificator?: string
+  modificators?: string
 };
 
-const Symbol: React.FC<TSymbolProps> = (props: TSymbolProps) => (
-  <span className={props.modificator ? `symbol symbol--${props.modificator}` : 'symbol'}>
-    {props.value}
+const Symbol: React.FC<TSymbolProps> = ({ value, modificators = '' }: TSymbolProps) => (
+  <span
+    className={modificators ? `symbol ${modificators.split(',').map(mod => `symbol--${mod}`).join(' ')}` : 'symbol'}
+  >
+    {value}
   </span>
 );
 
-export default Symbol;
+export default React.memo(Symbol);
