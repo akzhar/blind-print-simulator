@@ -1,13 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import Hint from '@components/Hint';
+import Message from '@components/Message';
+import ActionCreator from '@store/actions';
 
-const NotFoundPage: React.FC = () => (
-  <>
-    <Hint label="404" message="Запрошенный ресурс не был найден..."/>
-  </>
-);
+const NotFoundPage: React.FC = () => {
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(ActionCreator.set404WarningMessage());
+  });
+
+  return <Message />
+};
 
 export default NotFoundPage;
-
-
