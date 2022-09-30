@@ -16,7 +16,7 @@ const StatsSpeed: React.FC = () => {
     dispatch(ActionCreator.updateSpeed());
   }, [timerValue]);
 
-  return <StatsItem title="Скорость" value={speed} units="зн./мин."/>;
+  return <StatsItem title="Speed" value={speed} units="char / min"/>;
 };
 
 export default StatsSpeed;

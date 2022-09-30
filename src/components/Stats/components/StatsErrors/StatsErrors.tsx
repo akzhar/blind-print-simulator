@@ -8,7 +8,7 @@ const StatsErrors: React.FC = () => {
 
   const errorsCount: number = useSelector((state: TState) => state.symbols.wrongItemsIDs.length);
 
-  return <StatsItem title="Ошибок" value={errorsCount} units="зн."/>;
+  return <StatsItem title="Errors" value={errorsCount} units="chars"/>;
 };
 
 export default StatsErrors;

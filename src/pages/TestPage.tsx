@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,10 +25,23 @@ const TestPage: React.FC = () => {
     }
   }, []);
 
-  const onRestartButtonClick = () => {
-    dispatch(ActionCreator.reset());
-    navigate(AppRoutes.HOME);
+  const onChangeTextButtonClick = () => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    dispatch(ActionCreator.reset({ keepText: false }));
+    dispatch(ActionCreator.fetchSymbols());
   };
+
+  const onRestartButtonClick = () => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    dispatch(ActionCreator.reset({ keepText: true }));
+    dispatch(ActionCreator.timerStart());
+  };
+
+  useEffect(() => {
+    if(!hasNoData) {
+      dispatch(ActionCreator.timerStart());
+    }
+  }, [hasNoData]);
 
   React.useEffect(() => {
     if (hasNoData) {
@@ -49,7 +62,11 @@ const TestPage: React.FC = () => {
       <h1 className="visually-hidden">Тренажер слепой печати</h1>
       <Wrapper>
         <Stats />
-        <Button text="Заново" buttonClickHandler={onRestartButtonClick} isAnimate={isTestCompleted} />
+        <Button
+          text={isTestCompleted ? 'Restart': 'Another text'}
+          buttonClickHandler={isTestCompleted ? onRestartButtonClick : onChangeTextButtonClick}
+          isAnimate={isTestCompleted}
+        />
       </Wrapper>
       <Board showResultsMode={isTestCompleted}/>
       <Message />

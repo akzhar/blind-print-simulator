@@ -8,7 +8,7 @@ const StatsTime: React.FC = () => {
 
   const timerValue: number = useSelector((state: TState) => state.timer.value);
 
-  return <StatsItem title="Время" value={timerValue} units="сек."/>;
+  return <StatsItem title="Time" value={timerValue} units="sec"/>;
 };
 
 export default StatsTime;

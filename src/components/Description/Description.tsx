@@ -4,14 +4,14 @@ import { API_URL } from '@consts/const';
 
 const Description: React.FC = () => (
   <>
-    <h2>Описание функционала</h2>
-    <ul>
-      <li>получение текста для печати через <a href={API_URL} rel="noreferrer" target="_blank">публичное API</a></li>
-      <li>отображение набираемого текста в реальном времени</li>
-      <li>реакция на ввод неверных символов</li>
-      <li>подсчет и отображение скорости печати</li>
-      <li>подсчет и отображение точности вводимой информации</li>
-    </ul>
+  <h2>Description</h2>
+  <ul>
+    <li>getting text to type via <a href={API_URL} rel="noreferrer" target="_blank">public API</a> (RU texts only)</li>
+    <li>display of the typed text in real time</li>
+    <li>reaction to entering incorrect characters</li>
+    <li>calculation of typing speed</li>
+    <li>calculation of the accuracy of the typing</li>
+  </ul>
   </>
 );
 

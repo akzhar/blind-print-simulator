@@ -16,7 +16,7 @@ const StatsAccuracy: React.FC = () => {
     dispatch(ActionCreator.updateAccuracy());
   }, [errorsCount]);
 
-  return <StatsItem title="Точность" value={accuracy.toFixed(2)} units="%"/>;
+  return <StatsItem title="Accuracy" value={accuracy.toFixed(2)} units="%"/>;
 };
 
 export default StatsAccuracy;

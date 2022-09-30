@@ -25,6 +25,11 @@ type TjsonRes = {
   errorCode?: APIresErrorCode,
   text: string
 }
+
+interface IReset {
+  keepText: boolean
+}
+
 export enum ActionTypes {
   // timer
   RESET_TIMER = 'reset timer',
@@ -33,6 +38,7 @@ export enum ActionTypes {
   TICK_TIMER = 'tick timer',
   // symbols
   RESET_SYMBOLS = 'reset symbols',
+  RESET_SYMBOLS_BUT_KEEP_TEXT = 'reset symbols but keep text',
   SAVE_SYMBOLS = 'save symbols',
   SAVE_WRONG_SYMBOL_ID = 'save wrong symbol\'s id',
   GOTO_NEXT_SYMBOL = 'go to next symbol',
@@ -50,14 +56,18 @@ export enum ActionTypes {
 }
 
 const ActionCreator = {
-  reset: () => {
+  reset: ({ keepText }: IReset) => {
     return (dispatch: (action: TAction) => VoidFunction, getState: () => TState) => {
       const { timer } = getState();
       window.clearInterval(timer.updateInterval);
       dispatch({ type: ActionTypes.RESET_TIMER});
-      dispatch({ type: ActionTypes.RESET_SYMBOLS});
       dispatch({ type: ActionTypes.RESET_MESSAGE});
       dispatch({ type: ActionTypes.RESET_STATS});
+      if(keepText) {
+        dispatch({ type: ActionTypes.RESET_SYMBOLS_BUT_KEEP_TEXT});
+      } else {
+        dispatch({ type: ActionTypes.RESET_SYMBOLS});
+      }
     }
   },
   timerStart: () => {
@@ -74,20 +84,20 @@ const ActionCreator = {
   fetchSymbols: () => {
     return async (dispatch: (action: TAction) => void) => {
       try {
-        const res = await fetch(`${API_URL}/get`);
+        const res = await fetch(`${API_URL}/get?number=1`);
         const { status: resStatus, text: resBody, errorCode: resErrorCode }: TjsonRes = await res.json();
         if (resStatus === APIresStatus.OK) {
           dispatch({ type: ActionTypes.SAVE_SYMBOLS, payload: resBody.split('') });
         } else {
           const error = resBody;
-          const label = `Код ошибки ${resErrorCode}:`;
-          const text = `Ошибка при загрузке данных ${error}.`;
+          const label = 'Text loading error';
+          const text = `Error code: ${resErrorCode} Error message: ${error}`;
           dispatch({ type: ActionTypes.SET_WARNING_MESSAGE, payload: { label, text } });
           dispatch({ type: ActionTypes.SHOW_MESSAGE});
         }
       } catch (error) {
-        const label = 'Упс...';
-        const text = `Ошибка при загрузке данных: ${error}.`;
+        const label = 'Failed to load text...';
+        const text = `Error message: ${error}`;
         dispatch({ type: ActionTypes.SET_WARNING_MESSAGE, payload: { label, text } });
         dispatch({ type: ActionTypes.SHOW_MESSAGE});
       }
@@ -101,8 +111,8 @@ const ActionCreator = {
       const isWrongFirstTime = isWrong && !wrongItemsIDs.includes(currentItemID.toString());
       const isTestCompleted = (currentItemID >= items.length - 1) && !isWrong;
       if (isWrong) {
-        const label = 'Опечатка...';
-        const text = `'${typedSymbol}' вместо '${currentSymbol}'`;
+        const label = 'Oops...';
+        const text = `You typed '${typedSymbol}' instead of '${currentSymbol}'`;
         dispatch({ type: ActionTypes.SET_WARNING_MESSAGE, payload: { label, text } });
         dispatch({ type: ActionTypes.SHOW_MESSAGE});
       } else {
@@ -117,7 +127,7 @@ const ActionCreator = {
         dispatch({ type: ActionTypes.STOP_TIMER });
         dispatch({ type: ActionTypes.END_TYPING });
         const label = '^_^';
-        const text = 'Попробуй пройти тест заново и улучшить свой результат';
+        const text = 'Well done! Restart the game and try to improve your result';
         dispatch({ type: ActionTypes.SET_INFO_MESSAGE, payload: { label, text } });
         dispatch({ type: ActionTypes.SHOW_MESSAGE});
       }
@@ -125,8 +135,8 @@ const ActionCreator = {
   },
   set404WarningMessage: () => {
       return (dispatch: (action: TAction) => void) => {
-      const label = 'Код ошибки 404:';
-      const text = 'Запрошенный ресурс не был найден...';
+      const label = '404 error:';
+      const text = 'The requested resource was not found...';
       dispatch({ type: ActionTypes.SET_WARNING_MESSAGE, payload: { label, text } });
       dispatch({ type: ActionTypes.SHOW_MESSAGE});
     }
@@ -143,7 +153,7 @@ const ActionCreator = {
     return (dispatch: (action: TAction) => void, getState: () => TState) => {
       const { symbols: { items, wrongItemsIDs } } = getState();
       const accuracy = 100 - (wrongItemsIDs.length / items.length * 100);
-      dispatch({ type: ActionTypes.UPDATE_ACCURACY, payload: accuracy });
+      dispatch({ type: ActionTypes.UPDATE_ACCURACY, payload: isNaN(accuracy) ? 100 : accuracy });
     }
   }
 };

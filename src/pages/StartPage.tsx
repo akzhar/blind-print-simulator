@@ -22,6 +22,7 @@ const StartPage: React.FC = () => {
   }, []);
 
   const onStartButtonClick = () => {
+    dispatch(ActionCreator.reset({ keepText: true }));
     dispatch(ActionCreator.timerStart());
     navigate(AppRoutes.TEST);
   };
@@ -29,13 +30,13 @@ const StartPage: React.FC = () => {
   return (
     <>
       <Message />
-      <h1>Тренажер слепой печати</h1>
+      <h1>Blind typing simulator</h1>
       <Wrapper>
-        <p>Приготовься печатать... { canStart && <strong>Поехали!</strong> }</p>
+        <p>Get ready to typing... { canStart && <strong>Lets do it!</strong> }</p>
         {
           canStart
           ?
-          <Button text="Начать печатать" buttonClickHandler={onStartButtonClick} isAnimate/>
+          <Button text="Start" buttonClickHandler={onStartButtonClick} isAnimate/>
           :
           <Loader width={'200px'} />
         }

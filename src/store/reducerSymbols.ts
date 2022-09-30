@@ -21,6 +21,9 @@ const reducerSymbols = (state: TSymbolsState = initialState, action: TAction) =>
     case ActionTypes.RESET_SYMBOLS: {
       return initialState;
     }
+    case ActionTypes.RESET_SYMBOLS_BUT_KEEP_TEXT: {
+      return { ...initialState, items: state.items };
+    }
     case ActionTypes.SAVE_SYMBOLS: {
       return {...state, items: action.payload};
     }
