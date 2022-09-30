@@ -1,27 +1,22 @@
-# Тренажер слепой печати
+# Blind typing simulator
 
-- [Опубликованное приложение](https://blindprint-test-task.herokuapp.com)
+- [Open the app](https://blind-typing-simulator.herokuapp.com)
 
-## 1. Установка зависимостей
-Находясь в корневой папке проекта, выполните команду:
-`npm install`
+## 1. Description
+- getting text to type via [public API](https://fish-text.ru/api) (RU texts only)
+- display of the typed text in real time
+- reaction to entering incorrect characters
+- calculation of typing speed
+- calculation of the accuracy of the typing
 
-## 2. Запуск приложения в dev режиме
-Находясь в корневой папке проекта, выполните команду:
-`npm start`
+## 2. Install dependencies
+`git clone repo_url` → `cd ./repo-folder` → `npm install`
 
-## 3. Запуск собранного приложения
-Находясь в корневой папке проекта, выполните команды:
-1. `npm run build` (дождитесь завершения сборки)
-1. `cd public`
-2. `npm start`
+## 3. Run the app in development mode
+`cd ./repo-folder` → `npm run start`
 
-## 4. Описание функционала
-- получение текста для печати через [публичное API](https://fish-text.ru/api)
-- отображение набираемого текста в реальном времени
-- реакция на ввод неверных символов
-- подсчет и отображение скорости печати
-- подсчет и отображение точности вводимой информации
+## 4. Build and run the app
+`npm run build` (wait) → `cd public` → `npm run start`
 
 
 
