@@ -1,6 +1,10 @@
-# Blind typing simulator
+# Blind typing simulator ⌨️
 
 - [Open the app](https://blind-typing-simulator.herokuapp.com)
+
+## Demo
+
+<img src="https://raw.githubusercontent.com/akzhar/blind-typing-simulator/main/demo.gif" alt="demo" title="demo" width="100%"/>
 
 ## 1. Description
 - getting text to type via [public API](https://fish-text.ru/api) (RU texts only)
