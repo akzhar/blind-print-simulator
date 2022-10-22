@@ -1,15 +1,16 @@
 {
-  "name": "blindprint-test-task",
+  "name": "blind-typing-simulator",
   "version": "1.0.0",
   "private": true,
   "author": "akzhar.taov@yandex.ru",
-  "description": "blindprint-test-task",
+  "description": "blind typing simulator",
   "scripts": {
-    "start": "node index.js",
-    "deploy": "git add . && git commit -m \"heroku deploy\" && git push heroku master",
-    "logs": "heroku logs --tail",
-    "app-on": "heroku ps:scale web=1",
-    "app-off": "heroku ps:scale web=0"
+    "start": "PORT=3002 node index.js",
+    "service:enable": "systemctl enable blind-typing-simulator",
+    "service:start": "systemctl start blind-typing-simulator",
+    "service:stop": "systemctl stop blind-typing-simulator",
+    "service:restart": "systemctl enable blind-typing-simulator",
+    "service:status": "systemctl status blind-typing-simulator"
   },
   "dependencies": {
     "express": "4.17.1"

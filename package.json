@@ -1,9 +1,9 @@
 {
-  "name": "blindprint-test-task",
+  "name": "blind-typing-simulator",
   "version": "1.0.0",
   "private": true,
   "author": "akzhar.taov@yandex.ru",
-  "description": "blindprint-test-task",
+  "description": "Blind typing simulator",
   "scripts": {
     "eslint": "eslint --ext .tsx --ext .ts src/",
     "test": "npm run eslint",

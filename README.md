@@ -1,6 +1,6 @@
 # Blind typing simulator ⌨️
 
-- [Open the app](https://blind-typing-simulator.herokuapp.com)
+- [Open the app](http://80.78.241.253:3002)
 
 ## Demo
 
